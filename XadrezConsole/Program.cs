@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using Tabuleiro;
 using Tabuleiro.Exceptions;
 using Xadrez;
@@ -11,11 +12,21 @@ namespace XadrezConsole
         {
             try
             {
-                PosicaoXadrez pos = new PosicaoXadrez('a', 1);
-                Console.WriteLine(pos);
-                Console.WriteLine(pos.toPosicao());
+                PartidaDeXadrez partida = new PartidaDeXadrez();
+                
+                while(!partida.terminada)
+                {
+                    Console.Clear();
+                    Tela.imprimirTabuleiro(partida.tab);
 
-                Console.ReadLine();
+                    Console.WriteLine();
+                    Console.Write("Origem: ");
+                    Posicao origem = Tela.lerPosicaoXadrez().toPosicao();
+                    Console.Write("Destino: ");
+                    Posicao destino = Tela.lerPosicaoXadrez().toPosicao();
+
+                    partida.executaMovimento(origem, destino);
+                }
             }
             catch (TabuleiroException e)
             {
