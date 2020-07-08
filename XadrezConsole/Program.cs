@@ -43,6 +43,16 @@ namespace XadrezConsole
                         Console.WriteLine(e.Message);
                         Console.ReadLine();
                     }
+                    catch (FormatException fe)
+                    {
+                        Console.WriteLine("Erro: Formato de entrada inválido - " + fe.Message);
+                        Console.ReadLine();
+                    }
+                    catch (IndexOutOfRangeException ire)
+                    {
+                        Console.WriteLine("Erro: Index fora de Range - " + ire.Message);
+                        Console.ReadLine();
+                    }
                 }
                 Console.Clear();
                 Tela.imprimirPartida(partida);
@@ -50,6 +60,11 @@ namespace XadrezConsole
             catch (TabuleiroException e)
             {
                 Console.WriteLine(e.Message);
+            }            
+            catch(Exception ex)
+            {
+                Console.WriteLine("Excessão não identificada - Erro: " + ex.Message);
+                Console.ReadLine();
             }
         }
     }

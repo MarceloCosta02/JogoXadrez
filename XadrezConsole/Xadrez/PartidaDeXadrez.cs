@@ -43,6 +43,27 @@ namespace Xadrez
             {
                 capturadas.Add(pecaCapturada);
             }
+
+            // #jogadaEspecial roque pequeno
+            if(p is Rei && destino.Coluna == origem.Coluna + 2)
+            {
+                Posicao origemTorre = new Posicao(origem.Linha, origem.Coluna + 3);
+                Posicao destinoTorre = new Posicao(origem.Linha, origem.Coluna + 1);
+                Peca Torre = tab.retirarPeca(origemTorre);
+                Torre.incrementarQtdMovimentos();
+                tab.colocarPeca(Torre, destinoTorre);
+            }
+
+            // #jogadaEspecial roque grande
+            if (p is Rei && destino.Coluna == origem.Coluna - 2)
+            {
+                Posicao origemTorre = new Posicao(origem.Linha, origem.Coluna - 4);
+                Posicao destinoTorre = new Posicao(origem.Linha, origem.Coluna - 1);
+                Peca Torre = tab.retirarPeca(origemTorre);
+                Torre.incrementarQtdMovimentos();
+                tab.colocarPeca(Torre, destinoTorre);
+            }
+
             return pecaCapturada;
         }
 
@@ -85,7 +106,27 @@ namespace Xadrez
                 tab.colocarPeca(pecaCapturada, destino);
                 capturadas.Remove(pecaCapturada);
             }
-            tab.colocarPeca(p, origem);               
+            tab.colocarPeca(p, origem);
+
+            // #jogadaEspecial roque pequeno
+            if (p is Rei && destino.Coluna == origem.Coluna + 2)
+            {
+                Posicao origemTorre = new Posicao(origem.Linha, origem.Coluna + 3);
+                Posicao destinoTorre = new Posicao(origem.Linha, origem.Coluna + 1);
+                Peca Torre = tab.retirarPeca(destinoTorre);
+                Torre.decrementarQtdMovimentos();
+                tab.colocarPeca(Torre, origemTorre);
+            }
+
+            // #jogadaEspecial roque grande
+            if (p is Rei && destino.Coluna == origem.Coluna - 2)
+            {
+                Posicao origemTorre = new Posicao(origem.Linha, origem.Coluna - 4);
+                Posicao destinoTorre = new Posicao(origem.Linha, origem.Coluna - 1);
+                Peca Torre = tab.retirarPeca(destinoTorre);
+                Torre.decrementarQtdMovimentos();
+                tab.colocarPeca(Torre, origemTorre);
+            }
         }
 
         public void validarPosicaoDeOrigem(Posicao pos)
