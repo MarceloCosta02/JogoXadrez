@@ -26,6 +26,7 @@ namespace Tabuleiro
 
         public Peca peca(Posicao pos)
         {
+            validarPosicao(pos);
             return Pecas[pos.Linha, pos.Coluna];
         }
 
@@ -67,7 +68,7 @@ namespace Tabuleiro
 
         public void validarPosicao(Posicao pos)
         {
-            if (!posicaoValida(pos))            
+            if (posicaoValida(pos) == false)            
                 throw new TabuleiroException("Posição Inválida!");
             
         }
